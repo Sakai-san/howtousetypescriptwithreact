@@ -27,10 +27,10 @@ const renderBody = <R extends {}>(columns: Array<Column<R>>, rows: Array<R>) => 
     return body;
 };
 
-const Table = <R extends {}>({
+function Table<R extends object={}>({
     columns,
     rows,
-}: TableProps<R>) => {
+}: TableProps<R>) {
     const body = renderBody<R>(columns, rows);
     return (
         <table>
