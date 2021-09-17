@@ -1,0 +1,98 @@
+// Installed npm packages: jquery underscore request express
+// jade shelljs passport http sys lodash async mocha chai sinon
+// sinon-chai moment connect validator restify ejs ws co when
+// helmet wrench brain mustache should backbone forever debug jsdom
+
+var _ = require('underscore');
+
+var evens = _.reject([1, 2, 3, 4, 5, 6], (num) => num % 2 != 0);
+
+// aabbabc
+// aabbccddabc
+
+const hasDuplicate = (inputString) => {
+  const set = new Set([...inputString]);
+  const array = Array.from(set);
+  return [...inputString].length !== array.length;
+}
+
+const allPossbibleSubstring = (inputString) => {
+  const substrings = [];
+  for (let i=0; i< inputString.length; i++){
+    for (let j=i+1; j< inputString.length; j++){
+      substrings.push( inputString.slice(i, j) );
+    }
+  }
+  return substrings;
+}
+// complexity = O(n* (n*n) );
+// complexity = O(n*n*n );
+
+const longuestString = (strings) => {
+  let longuest = '';
+  strings.forEach( (string) => {
+      if(string.length > longuest.length ){
+        longuest = string;
+      }
+  });
+  
+  return longuest;
+   
+};
+
+function longestNonrepeatingSubstring (input, allPossbibleSubstring) {
+  const allStrings = allPossbibleSubstring(input);
+  const uniques = allStrings.filer( (string) => ! hasDuplicate(string));
+  return longuestString(uniques);
+}
+
+const returne0 = longestNonrepeatingSubstring('aabbccddabc', allPossbibleSubstring);
+console.log('returne0', returne0);
+
+// Your last TypeScript (Node) code is saved below:
+// class Vendor {
+//   name: string;
+
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+
+//   greet() {
+//     return "Hello, welcome to " + this.name;
+//   }
+// }
+
+// const shop = new Vendor("Ye Olde Shop");
+// console.log(shop.greet());
+
+
+
+// // Your last C/C++ code is saved below:
+// // // Installed npm packages: jquery underscore request express
+// // // jade shelljs passport http sys lodash async mocha chai sinon
+// // // sinon-chai moment connect validator restify ejs ws co when
+// // // helmet wrench brain mustache should backbone forever debug jsdom
+
+
+// // // --Challenge--
+// // //
+// // // Write a function that returns the longest substring for a string input which contains only 
+// // // one ocurrence of each character.
+// // //
+// // // Examples
+// // //
+// // //  longestNonrepeatingSubstring("abcabcbbz") ➞ "abc"
+// // //
+// // //  longestNonrepeatingSubstring("abcabcbb") ➞ "abc"
+// // //
+// // //  longestNonrepeatingSubstring("abcaefghe") ➞ "bcaefgh"
+// // //
+// // //  longestNonrepeatingSubstring("aaaaaa") ➞ "a"
+// // //
+// // //  longestNonrepeatingSubstring("abcde") ➞ "abcde"
+// // //
+// // //  longestNonrepeatingSubstring("abcda") ➞ "abcd"
+// // //
+// // // Notes:
+// // //  If multiple substrings tie in length, return the one which occurs first.
+// // //  Bonus: Can you solve this problem in linear time?
