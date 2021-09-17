@@ -8,7 +8,7 @@ interface TableProps<R> {
     rows: Array<R>;
 };
 
-const renderBody = <R extends {}>(columns: Array<Column<R>>, rows: Array<R>) => {
+const renderBody = <R extends {}>(columns: TableProps<R>['columns'], rows: TableProps<R>['rows']) => {
     const rowsLength = rows.length;
     const colsLength = columns.length;
 
