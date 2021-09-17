@@ -1,6 +1,6 @@
 export interface Column<R> {
     label: string;
-    accessor: keyof R | ((row: R) => number | string)
+    accessor: (row: R) => number | string
 };
 
 interface TableProps<R> {
@@ -8,7 +8,7 @@ interface TableProps<R> {
     rows: Array<R>;
 };
 
-const renderBody = <R,>(columns: TableProps<R>['columns'], rows: TableProps<R>['rows']) => {
+function renderTableBody<R>(columns: Array<Column<R>>, rows: Array<R>){
     const rowsLength = rows.length;
     const colsLength = columns.length;
 
@@ -18,7 +18,7 @@ const renderBody = <R,>(columns: TableProps<R>['columns'], rows: TableProps<R>['
         const row = [];
         for (let j = 0; j < colsLength; j++){
             const key = columns[j].accessor;
-            const value = typeof key === 'function' ? key(rows[i]) : rows[i][key];
+            const value = key(rows[i]);
             row.push(<td key={`${i},${j}`}>{value}</td>);
         }
         body.push(<tr key={i}>{row}</tr>);
@@ -27,11 +27,10 @@ const renderBody = <R,>(columns: TableProps<R>['columns'], rows: TableProps<R>['
     return body;
 };
 
-function Table<R extends object={}>({
+function Table<R>({
     columns,
     rows,
 }: TableProps<R>) {
-    const body = renderBody<R>(columns, rows);
     return (
         <table>
             <thead>
@@ -40,7 +39,7 @@ function Table<R extends object={}>({
                 </tr>
             </thead>
             <tbody>
-                {body}
+                {renderTableBody<R>(columns, rows)}
             </tbody>            
         </table>
     );

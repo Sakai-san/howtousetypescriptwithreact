@@ -54,15 +54,15 @@ const rows: Array<Row> = [
 const columns: Array<Column<Row>> = [
   {
     label: 'First name',
-    accessor: 'first',
+    accessor: (r: Row) => r.first
   },
   {
     label: 'Last name',
-    accessor: 'last',
+    accessor: (r: Row) => r.last
   },
   {
     label: 'Address street',
-    accessor: (r: Row) => `${r.address.street}`
+    accessor: (r: Row) => r.address.street
   },
   {
     label: 'Address city',
