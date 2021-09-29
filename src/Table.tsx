@@ -9,22 +9,19 @@ interface TableProps<R> {
 };
 
 function renderTableBody<R>(columns: Array<Column<R>>, rows: Array<R>){
-    const rowsLength = rows.length;
-    const colsLength = columns.length;
-
-    const body = [];
-
-    for (let i = 0; i < rowsLength; i++){
-        const row = [];
-        for (let j = 0; j < colsLength; j++){
-            const key = columns[j].accessor;
-            const value = key(rows[i]);
-            row.push(<td key={`${i},${j}`}>{value}</td>);
-        }
-        body.push(<tr key={i}>{row}</tr>);
-    }
-
-    return body;
+    return (
+        <tbody>
+            {rows.map ( (row, i) =>
+                <tr key={i}>
+                    {
+                        columns.map((col, j) =>
+                            <td key={`${i},${j}`}> {col.accessor(row)} </td>
+                        )
+                    }
+                </tr>
+            )}
+        </tbody>
+    );
 };
 
 function Table<R>({
@@ -38,9 +35,9 @@ function Table<R>({
                     {columns.map((column) => <th>{column.label}</th>)}
                 </tr>
             </thead>
-            <tbody>
-                {renderTableBody<R>(columns, rows)}
-            </tbody>            
+
+            {renderTableBody<R>(columns, rows)}
+
         </table>
     );
 };
