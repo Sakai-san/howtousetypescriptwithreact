@@ -1,85 +1,66 @@
 import React from "react";
-import Table, { Column } from "./Table";
-import Autocomplete from "./Autocomplete";
+import Select from "./Select";
 import logo from "./logo.svg";
 import "./App.css";
 
-type Row = {
-  first: string;
-  last: string;
+interface Employee  {
+  first: string,
+  last: string,
   address: {
-    street: string;
-    place: {
-      city: string;
-      zip: string;
-    };
-  };
+    city: string,
+    street: string,
+    number: number,
+  }
 };
 
-const rows: Array<Row> = [
+const employees = [
   {
-    first: "Thomas",
-    last: "Nakayama",
+    first: 'Thomas',
+    last: 'Rubattel',
     address: {
-      street: "Grubenstrasse 4",
-      place: {
-        city: "Zurich",
-        zip: "8049",
-      },
-    },
+      city: 'Zurich',
+      street: 'Raeffelstrasse',
+      number: 49,
+    }
   },
   {
-    first: "Marc",
-    last: "Werder",
+    first: 'Lisa',
+    last: 'Merz',
     address: {
-      street: "Dufourstrasse 138",
-      place: {
-        city: "Zurich",
-        zip: "8008",
-      },
-    },
+      city: 'Zurich',
+      street: 'Badenstrasse',
+      number: 75,
+    }
   },
   {
-    first: "Sebastian",
-    last: "Bohl",
+    first: 'Grigor',
+    last: 'Brogrov',
     address: {
-      street: "Sihlfeldstrasse 118",
-      place: {
-        city: "Zurich",
-        zip: "8004",
-      },
-    },
-  },
-];
-
-const columns: Array<Column<Row>> = [
-  {
-    label: "First name",
-    accessor: (r: Row) => r.first,
-  },
-  {
-    label: "Last name",
-    accessor: (r: Row) => r.last,
-  },
-  {
-    label: "Address street",
-    accessor: (r: Row) => r.address.street,
-  },
-  {
-    label: "Address city",
-    accessor: (r: Row) => `${r.address.place.zip}, ${r.address.place.city}`,
-  },
+      city: 'Zurich',
+      street: 'Foerlibuckstrasse',
+      number: 89,
+    }
+  }
 ];
 
 function App() {
   return (
     <div className="App">
-      {/*      <Table<Row> columns={columns} rows={rows} /> */}
-      <Autocomplete<Row>
-        placeholder="look for a student"
-        rows={rows}
-        renderRow={(r) => `${r.last}, ${r.first}, ${r.address.place.city}`}
-      />
+      <Select<Employee> rows={employees} makeRow={(row) => `${row.first}` } />
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }
