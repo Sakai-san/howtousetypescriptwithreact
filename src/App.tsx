@@ -19,8 +19,8 @@ const employees = [
     last: 'Rubattel',
     address: {
       city: 'Zurich',
-      street: 'Raeffelstrasse',
-      number: 49,
+      street: 'Bahnhofstrasse',
+      number: 12,
     }
   },
   {
